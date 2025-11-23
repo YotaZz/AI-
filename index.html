@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 深思酒馆</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              wood: {
+                800: '#3E2723',
+                900: '#261612',
+              },
+              parchment: {
+                100: '#F5E6D3',
+                200: '#E6D2B5',
+                800: '#5D4037',
+              },
+              glow: {
+                gold: '#FFD700',
+                blue: '#00BFFF',
+                purple: '#9370DB'
+              }
+            },
+            animation: {
+              'flicker': 'flicker 3s infinite alternate',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              flicker: {
+                '0%, 18%, 22%, 25%, 53%, 57%, 100%': { opacity: 1 },
+                '20%, 24%, 55%': { opacity: 0.9 },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #1a100c;
+        color: #F5E6D3;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #261612; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #5D4037; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #8D6E63; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

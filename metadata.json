@@ -1,0 +1,5 @@
+{
+  "name": "AI深思酒馆",
+  "description": "一个沉浸式的AI酒馆，GLM-4.5、Qwen3和GLM-Z1在此针对话题进行深度探讨与观点演化。",
+  "requestFramePermissions": []
+}
