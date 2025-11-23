@@ -1,5 +1,3 @@
-// yotazz/ai-/AI--40bcc9bbbecb5a08900db605012cab3c16cdbb22/components/Avatar.tsx
-
 import React from 'react';
 import { Character } from '../types';
 
@@ -12,9 +10,9 @@ interface AvatarProps {
 
 const Avatar: React.FC<AvatarProps> = ({ character, isActive, size = 'md', modelName }) => {
   const sizeClasses = {
-    // 电脑端稍微调大 Observer (sm) 的尺寸，让它在中间不显得太弱小
-    sm: 'w-10 h-10 lg:w-16 lg:h-16', 
-    md: 'w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24', 
+    // 电脑端稍微调大 Observer (sm) 的尺寸
+    sm: 'w-12 h-12 lg:w-20 lg:h-20', 
+    md: 'w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28', 
     lg: 'w-24 h-24'
   };
 
@@ -28,13 +26,13 @@ const Avatar: React.FC<AvatarProps> = ({ character, isActive, size = 'md', model
         <div className={`absolute -bottom-1 w-2 h-2 lg:w-3 lg:h-3 rounded-full ${character.color.replace('text-', 'bg-')} animate-ping`} />
       )}
       
-      {/* 修改处：lg:text-base 增大名字 */}
-      <span className={`mt-2 text-xs lg:text-base font-bold font-serif uppercase tracking-wider ${character.color} bg-black/50 px-2 py-0.5 rounded whitespace-nowrap`}>
+      {/* 调整：名字字号变大 */}
+      <span className={`mt-2 text-sm lg:text-lg font-bold font-serif uppercase tracking-wider ${character.color} bg-black/50 px-2 py-0.5 rounded whitespace-nowrap`}>
         {character.name}
       </span>
       
-      {/* 修改处：lg:text-xs 增大模型名 */}
-      <span className="text-[10px] lg:text-xs text-parchment-200/50 uppercase tracking-tighter mt-1 hidden sm:block">
+      {/* 调整：模型名字号变大 */}
+      <span className="text-xs lg:text-sm text-parchment-200/50 uppercase tracking-tighter mt-1 hidden sm:block">
         {modelName || character.model}
       </span>
     </div>

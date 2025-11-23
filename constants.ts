@@ -18,7 +18,7 @@ export const CHARACTERS: Record<CharacterRole, Character> = {
     description: "理论构建者。一位富有远见的思想家，致力于基于第一性原理搭建逻辑严密的理论大厦。语言优雅而自信。",
     config: {
       enableThinking: true,
-      temperature: 0.7
+      temperature: 0.3
     }
   },
   [CharacterRole.DEBATER_B]: {
@@ -31,7 +31,7 @@ export const CHARACTERS: Record<CharacterRole, Character> = {
     description: "批判性思想家。目光犀利，善于发现论证中的裂隙。像一位严谨的评论家，致力于通过证伪来逼近真理。",
     config: {
       enableThinking: true,
-      temperature: 0.7 // Lowered slightly for more rigor
+      temperature: 0.3 // Lowered slightly for more rigor
     }
   },
   [CharacterRole.OBSERVER]: {
@@ -44,7 +44,7 @@ export const CHARACTERS: Record<CharacterRole, Character> = {
     description: "博学的智者。超脱于具体的争论之外，善于从矛盾中提炼共识，用辩证的视角指引讨论的方向。",
     config: {
       enableThinking: true,
-      temperature: 0.5 // Lowered for stability
+      temperature: 0.15 // Lowered for stability
     }
   },
   // Placeholders

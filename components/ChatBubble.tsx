@@ -1,5 +1,3 @@
-// yotazz/ai-/AI--40bcc9bbbecb5a08900db605012cab3c16cdbb22/components/ChatBubble.tsx
-
 import React, { useRef, useState } from 'react';
 import { Message, CharacterRole } from '../types';
 import { CHARACTERS } from '../constants';
@@ -17,27 +15,27 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, fontSize = 'base' }) =
   const char = CHARACTERS[message.role];
   const bubbleRef = useRef<HTMLDivElement>(null);
 
-  // 1. 定义字号映射配置 (解决动态类名不生效问题 + 实现字号升级)
-  // 用户气泡 (User) 使用 text-* 类
+  // 1. 字号整体平移设置
+  // 用户气泡 (User)
   const userTextSize = {
-    sm: 'text-base',      // 原 sm -> 现 base (16px)
-    base: 'text-lg',      // 原 base -> 现 lg (18px, 对应之前的XL)
-    lg: 'text-xl',        // 新增更大一级 (20px)
-    xl: 'text-2xl'        // 新增最大一级 (24px)
+    sm: 'text-lg',       // 原 base -> 现 lg (常规即为大字)
+    base: 'text-xl',     // 原 lg -> 现 xl (大号即为之前的特大)
+    lg: 'text-2xl',      // 原 xl -> 现 2xl
+    xl: 'text-3xl'       // 新增超大 3xl
   }[fontSize];
 
-  // AI 气泡 (Markdown) 使用 prose-* 类
+  // AI 气泡 (Markdown)
   const aiProseSize = {
-    sm: 'prose-base',     // 16px
-    base: 'prose-lg',     // 18px
-    lg: 'prose-xl',       // 20px
-    xl: 'prose-2xl'       // 24px
+    sm: 'prose-lg',      // 常规起始为 lg
+    base: 'prose-xl',    // 大号为 xl
+    lg: 'prose-2xl',     // 特大为 2xl
+    xl: 'prose-2xl'      // 超大维持 2xl (Standard Tailwind Prose 最大通常为 2xl，已非常巨大)
   }[fontSize];
 
   if (isSystem) {
     return (
       <div ref={bubbleRef} className="flex justify-center my-4 opacity-60">
-        <span className="text-xs italic text-parchment-200 border-b border-parchment-800 pb-1">{message.content}</span>
+        <span className="text-sm italic text-parchment-200 border-b border-parchment-800 pb-1">{message.content}</span>
       </div>
     );
   }
@@ -46,7 +44,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, fontSize = 'base' }) =
     return (
       <div ref={bubbleRef} className="flex justify-end my-4 px-4">
         <div className="max-w-[80%] bg-wood-800 border border-parchment-800 rounded-lg p-3 text-parchment-100 shadow-lg">
-          {/* 应用用户字号映射 */}
+          {/* 应用新的用户字号 */}
           <p className={`font-serif ${userTextSize}`}>
              {message.content}
           </p>
@@ -79,16 +77,15 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, fontSize = 'base' }) =
         <img 
           src={char.avatar} 
           alt={char.name} 
-          className={`w-10 h-10 rounded-full border border-parchment-800 object-cover`}
+          className={`w-12 h-12 rounded-full border border-parchment-800 object-cover`} // 头像稍微调大一点点 w-10 -> w-12
         />
       </div>
 
       <div className={`flex flex-col max-w-[85%] ${message.role === CharacterRole.DEBATER_B ? 'items-end' : 'items-start'}`}>
-        <span className={`text-xs font-bold mb-1 ${char.color}`}>{char.name}</span>
+        <span className={`text-sm font-bold mb-1 ${char.color}`}>{char.name}</span>
         
-        <div className={`relative p-4 rounded-lg bg-black/40 border ${char.borderColor} backdrop-blur-sm shadow-xl w-full`}>
-           {/* Decorative Triangle */}
-           <div className={`absolute top-3 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent 
+        <div className={`relative p-5 rounded-lg bg-black/40 border ${char.borderColor} backdrop-blur-sm shadow-xl w-full`}>
+           <div className={`absolute top-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent 
               ${message.role === CharacterRole.DEBATER_B 
                 ? '-right-2 border-l-[8px] border-l-stone-900' 
                 : '-left-2 border-r-[8px] border-r-stone-900'} 
@@ -97,21 +94,21 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, fontSize = 'base' }) =
            <div className="text-parchment-100 font-serif">
              {thinkingContent && (
                 <details 
-                  className="mb-3 group" 
+                  className="mb-4 group" 
                   open={isThinkingOpen}
                   onToggle={(e) => setIsThinkingOpen(e.currentTarget.open)}
                 >
-                    <summary className="cursor-pointer text-[10px] uppercase tracking-widest text-parchment-800 hover:text-amber-500 flex items-center gap-1 select-none">
+                    <summary className="cursor-pointer text-xs uppercase tracking-widest text-parchment-800 hover:text-amber-500 flex items-center gap-1 select-none">
                         <span className="group-open:rotate-90 transition-transform">▶</span>
                         思维链 (Thinking Process)
                     </summary>
-                    <div className="mt-2 pl-3 border-l-2 border-parchment-800/30 text-parchment-200/60 text-xs italic whitespace-pre-wrap leading-relaxed">
+                    <div className="mt-2 pl-3 border-l-2 border-parchment-800/30 text-sm italic whitespace-pre-wrap leading-relaxed text-parchment-200/60">
                         {thinkingContent}
                     </div>
                 </details>
              )}
              
-             {/* 2. 应用 AI 字号映射 (确保 prose-lg/xl/2xl 生效) */}
+             {/* 应用新的 AI 字号 */}
              <div className={`prose prose-invert ${aiProseSize} prose-p:leading-relaxed prose-strong:text-amber-500 max-w-none`}>
                 <ReactMarkdown>{mainContent}</ReactMarkdown>
              </div>

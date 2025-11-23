@@ -1,5 +1,3 @@
-// yotazz/ai-/AI--40bcc9bbbecb5a08900db605012cab3c16cdbb22/App.tsx
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { CharacterRole, ChatState } from './types';
 import { CHARACTERS, AVAILABLE_MODELS } from './constants';
@@ -29,7 +27,7 @@ const App: React.FC = () => {
               return stored as FontSize;
           }
       }
-      return 'base'; // 默认中号 (现在已经是较大的字号了)
+      return 'base'; // 默认中号
   };
 
   const [apiKey, setApiKey] = useState<string>(getInitialKey);
@@ -273,19 +271,18 @@ const App: React.FC = () => {
           <div className="bg-wood-800 border-2 border-amber-700 p-8 rounded-lg shadow-2xl max-w-lg w-full relative">
              <h2 className="text-2xl font-serif text-amber-500 mb-6 text-center border-b border-amber-900/50 pb-4">酒馆设置</h2>
              <div className="mb-6">
-                <label className="block text-parchment-200 text-xs uppercase tracking-wider mb-2">DMXAPI 密钥</label>
-                <input type="password" value={tempKey} onChange={(e) => setTempKey(e.target.value)} placeholder="API Key (sk-...)" className="w-full bg-black/50 border border-parchment-800 rounded p-2 text-parchment-100 focus:border-amber-500 outline-none font-mono"/>
+                <label className="block text-parchment-200 text-sm uppercase tracking-wider mb-2">DMXAPI 密钥</label>
+                <input type="password" value={tempKey} onChange={(e) => setTempKey(e.target.value)} placeholder="API Key (sk-...)" className="w-full bg-black/50 border border-parchment-800 rounded p-2 text-parchment-100 focus:border-amber-500 outline-none font-mono text-base"/>
             </div>
 
-            {/* 字号选择器 - 更新了文案 */}
             <div className="mb-6">
-                <label className="block text-parchment-200 text-xs uppercase tracking-wider mb-2">聊天字号</label>
+                <label className="block text-parchment-200 text-sm uppercase tracking-wider mb-2">聊天字号</label>
                 <div className="flex gap-2 bg-black/30 p-1 rounded border border-parchment-800/50">
                     {(['sm', 'base', 'lg', 'xl'] as const).map((size) => (
                         <button
                             key={size}
                             onClick={() => setFontSize(size)}
-                            className={`flex-1 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all
+                            className={`flex-1 py-2 rounded text-sm font-bold uppercase tracking-wider transition-all
                                 ${fontSize === size 
                                     ? 'bg-amber-700 text-white shadow-lg' 
                                     : 'text-parchment-200/50 hover:bg-white/5 hover:text-parchment-200'
@@ -299,12 +296,12 @@ const App: React.FC = () => {
             </div>
 
             <div className="space-y-4 mb-8">
-                <label className="block text-parchment-200 text-xs uppercase tracking-wider border-b border-parchment-800/30 pb-1">角色模型分配</label>
+                <label className="block text-parchment-200 text-sm uppercase tracking-wider border-b border-parchment-800/30 pb-1">角色模型分配</label>
                 <div className="grid grid-cols-1 gap-4">
                     {[CharacterRole.DEBATER_A, CharacterRole.DEBATER_B, CharacterRole.OBSERVER].map(role => (
                         <div key={role} className="flex items-center justify-between">
-                            <span className={`text-sm font-bold ${CHARACTERS[role].color}`}>{CHARACTERS[role].name}</span>
-                            <select value={modelConfig[role]} onChange={(e) => setModelConfig({...modelConfig, [role]: e.target.value})} className="bg-black/30 border border-parchment-800 rounded text-sm p-1 text-parchment-100 w-48 outline-none">
+                            <span className={`text-base font-bold ${CHARACTERS[role].color}`}>{CHARACTERS[role].name}</span>
+                            <select value={modelConfig[role]} onChange={(e) => setModelConfig({...modelConfig, [role]: e.target.value})} className="bg-black/30 border border-parchment-800 rounded text-sm p-2 text-parchment-100 w-48 outline-none">
                                 {AVAILABLE_MODELS.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                             </select>
                         </div>
@@ -312,7 +309,7 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div className="flex justify-end gap-2">
-              <button onClick={handleSaveConfig} className="bg-amber-700 hover:bg-amber-600 text-white px-6 py-2 rounded font-bold transition-colors w-full">进入酒馆</button>
+              <button onClick={handleSaveConfig} className="bg-amber-700 hover:bg-amber-600 text-white px-6 py-2.5 rounded font-bold transition-colors w-full text-base">进入酒馆</button>
             </div>
           </div>
         </div>
@@ -326,7 +323,7 @@ const App: React.FC = () => {
       <header className="flex-shrink-0 w-full lg:w-80 xl:w-[360px] z-20 flex flex-col items-center transition-all duration-300 bg-gradient-to-b lg:bg-gradient-to-r from-black/40 to-transparent lg:border-r lg:border-white/5 lg:backdrop-blur-sm lg:h-full lg:justify-center">
         <div className="w-full p-6 flex flex-col items-center h-full lg:justify-center">
             <h1 className="text-3xl lg:text-4xl font-serif text-amber-500 tracking-widest uppercase mb-2 drop-shadow-md pointer-events-auto text-center">AI 深思酒馆</h1>
-            <p className="text-parchment-200/60 text-sm lg:text-sm mb-8 lg:mb-0 pointer-events-auto text-center lg:absolute lg:top-24">深度思维 · 观点演化</p>
+            <p className="text-parchment-200/60 text-base mb-8 lg:mb-0 pointer-events-auto text-center lg:absolute lg:top-24">深度思维 · 观点演化</p>
 
             <div className="flex w-full justify-around items-end h-32 lg:h-auto lg:flex-col lg:items-center lg:justify-center lg:gap-20 mb-4 relative pointer-events-auto lg:flex-1 lg:w-full">
                 <div className="flex flex-col items-center w-1/3 lg:w-full transition-transform duration-500 z-10">
@@ -355,7 +352,7 @@ const App: React.FC = () => {
 
             <div className="h-6 mt-4 lg:mt-0 lg:absolute lg:bottom-10 text-center">
                 {state.status === 'active' && state.currentTurn && (
-                    <p className="text-xs uppercase tracking-widest text-parchment-200 animate-pulse bg-black/30 px-3 py-1 rounded-full border border-white/10">
+                    <p className="text-sm uppercase tracking-widest text-parchment-200 animate-pulse bg-black/30 px-3 py-1 rounded-full border border-white/10">
                         正在发言: {CHARACTERS[state.currentTurn].name}
                     </p>
                 )}
@@ -395,18 +392,18 @@ const App: React.FC = () => {
                     onKeyDown={(e) => e.key === 'Enter' && state.status !== 'active' && startDiscussion()}
                     disabled={state.status === 'active'}
                     placeholder={state.status === 'active' ? "正在聆听讨论..." : "输入话题 (例如：自由意志存在吗？)"}
-                    className="flex-1 bg-black/60 border border-parchment-800 rounded-md px-4 py-3 text-parchment-100 placeholder-parchment-800 focus:outline-none focus:border-amber-600 transition-colors disabled:opacity-50 font-serif shadow-2xl"
+                    className="flex-1 bg-black/60 border border-parchment-800 rounded-md px-4 py-3 text-lg text-parchment-100 placeholder-parchment-800 focus:outline-none focus:border-amber-600 transition-colors disabled:opacity-50 font-serif shadow-2xl"
                 />
                 <button 
                     onClick={startDiscussion}
                     disabled={state.status === 'active' || !input.trim()}
-                    className="bg-amber-800 hover:bg-amber-700 disabled:bg-stone-800 disabled:text-stone-600 text-parchment-100 font-bold py-2 px-6 rounded-md shadow-lg transition-all border border-amber-900 font-serif uppercase tracking-wider whitespace-nowrap"
+                    className="bg-amber-800 hover:bg-amber-700 disabled:bg-stone-800 disabled:text-stone-600 text-parchment-100 font-bold py-2 px-6 rounded-md shadow-lg transition-all border border-amber-900 font-serif uppercase tracking-wider whitespace-nowrap text-lg"
                 >
                     {state.status === 'active' ? '讨论中' : '开始'}
                 </button>
                 <button
                     onClick={() => setShowConfigModal(true)}
-                    className="bg-stone-800 hover:bg-stone-700 text-parchment-200 px-3 rounded-md border border-stone-600"
+                    className="bg-stone-800 hover:bg-stone-700 text-parchment-200 px-4 rounded-md border border-stone-600 text-xl"
                     title="设置与密钥"
                 >
                     ⚙️
@@ -415,7 +412,7 @@ const App: React.FC = () => {
             {state.status === 'active' && (
                  <button 
                     onClick={stopDiscussion}
-                    className="mx-auto block mt-2 text-xs text-red-400 hover:text-red-300 underline cursor-pointer z-40 relative"
+                    className="mx-auto block mt-2 text-sm text-red-400 hover:text-red-300 underline cursor-pointer z-40 relative"
                  >
                     停止讨论
                  </button>
